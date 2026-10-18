@@ -220,6 +220,7 @@
     const top = active.filter((c) => RATE.get(c.id) != null).sort((a, b) => RATE.get(b.id) - RATE.get(a.id)).slice(0, 10);
     const groups = {};
     for (const c of active) (groups[c.act] = groups[c.act] || []).push(c);
+    const width = ($("overview").clientWidth || 760) - 34;
     $("overview").innerHTML = `
       <section class="ov-card ov-top">
         <header><h3>Best pay per hour</h3><a href="?q=" data-sort="rate">All by pay per hour →</a></header>
@@ -230,6 +231,7 @@
         </table>
         <p class="note">From players' reported times (median of ${MIN_RUNS}+ runs, via SCMDB). It leaves out travel to the contract, and the rewards scale with your rank, so take it as a guide.</p>
       </section>
+      ${window.PaySpread ? PaySpread.card(active, RATE, ACTS, width) : ""}
       <div class="ov-grid">${Object.keys(ACTS).filter((a) => groups[a]).map((a) => actCard(a, groups[a])).join("")}</div>`;
   }
 
@@ -496,6 +498,12 @@
   $("systemChips").addEventListener("click", (e) => {
     const b = e.target.closest("[data-system]");
     if (b) { state.system = b.dataset.system; write(SYSTEM_KEY, state.system); render(); }
+  });
+  if (window.PaySpread) PaySpread.bind($("overview"));
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => { if (state.view === "overview") renderOverview(); }, 150);
   });
   $("overview").addEventListener("click", (e) => {
     const a = e.target.closest("[data-act]");

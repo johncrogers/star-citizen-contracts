@@ -477,3 +477,23 @@ details.inline summary { cursor: pointer; display: inline; }
 .chips-static a.chip-static:hover { border-color: var(--accent); }
 .stats { margin-top: 14px; }
 .kv div { grid-template-columns: 130px 1fr; }
+
+/* ── Pay per hour spread ───────────────────── */
+.sp-card { position: relative; margin-top: 16px; }
+.sp-plot { width: 100%; overflow: hidden; }
+.sp-svg { display: block; }
+.sp-grid { stroke: #222b36; stroke-width: 1; }
+.sp-row { stroke: #2a3441; stroke-width: 1; }
+.sp-tick { fill: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.sp-label { fill: var(--text); font-size: 12px; }
+.sp-hit { fill: transparent; }
+.sp-dot { fill: #4d5866; stroke: var(--panel); stroke-width: 1; }
+.sp-pt.starter .sp-dot { fill: #3987e5; }
+.sp-pt:hover .sp-dot, .sp-pt:focus .sp-dot { stroke: var(--text); stroke-width: 2; }
+.sp-pt:focus { outline: none; }
+.sp-med { stroke: #e6edf3; stroke-width: 2; }
+.sp-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--muted); margin: 4px 0 8px; }
+.sp-key { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #4d5866; margin-right: 6px; vertical-align: -1px; }
+.sp-key.starter { background: #3987e5; }
+.sp-key.med { width: 2px; height: 14px; border-radius: 0; background: #e6edf3; vertical-align: -3px; }
+.sp-tip { position: absolute; z-index: 5; max-width: 320px; padding: 6px 10px; background: var(--panel-2); border: 1px solid var(--border); border-radius: 6px; font-size: 13px; pointer-events: none; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); }
