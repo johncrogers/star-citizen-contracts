@@ -13,6 +13,9 @@
   const SYSTEMS = ["Stanton", "Pyro", "Nyx"];
   const SITE = window.SITE || {};
   const siteHref = (id) => ((SITE.links || []).find((l) => l.id === id) || {}).href;
+  // Names link to their entry in the glossary app (it finds the entry by name).
+  const glossaryHref = ((window.SITE || {}).links || []).find((l) => l.id === "glossary")?.href;
+  const lookUp = (name) => (glossaryHref && name ? `<a class="lookup" href="${esc(glossaryHref)}#find/${encodeURIComponent(name)}" title="Look up ${esc(name)} in the glossary">${esc(name)}</a>` : esc(name));
 
   const esc = (s) =>
     String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
@@ -412,7 +415,7 @@
     $("detail").innerHTML = `
       <div class="hero-spacer"></div>
       <div class="detail-head">
-        <div><h2>${withTokens(c.title)}</h2><p class="sub">${esc([c.by, c.type].filter(Boolean).join(" · "))}</p></div>
+        <div><h2>${withTokens(c.title)}</h2><p class="sub">${[c.by && lookUp(c.by), c.type && esc(c.type)].filter(Boolean).join(" · ")}</p></div>
         <div class="badges"><span class="tag act">${esc(ACTS[c.act])}</span>${c.illegal ? `<span class="tag illegal">Illegal</span>` : `<span class="tag legal">Legal</span>`}${c.off ? `<span class="tag off">Not running</span>` : ""}</div>
       </div>
       ${c.alt ? `<p class="sub">Also offered as: ${c.alt.map(withTokens).join(", ")}</p>` : ""}

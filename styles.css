@@ -497,3 +497,7 @@ details.inline summary { cursor: pointer; display: inline; }
 .sp-key.starter { background: #3987e5; }
 .sp-key.med { width: 2px; height: 14px; border-radius: 0; background: #e6edf3; vertical-align: -3px; }
 .sp-tip { position: absolute; z-index: 5; max-width: 320px; padding: 6px 10px; background: var(--panel-2); border: 1px solid var(--border); border-radius: 6px; font-size: 13px; pointer-events: none; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); }
+
+/* Names that link to the glossary: quiet until hovered. */
+a.lookup { color: inherit; text-decoration: underline dotted; text-underline-offset: 3px; }
+a.lookup:hover { color: var(--accent); }
